@@ -1,4 +1,4 @@
-[database:vars]
+[hosts:jboss_eap_rhel_hosts]
 <% @dialog.each { |key,value| 
    next if value == nil || value.to_s.empty?
    value = 'true'  if value.to_s == 't'               %>
@@ -7,7 +7,7 @@
 <% } %>
 
 
-[database]
+[hosts]
 <% @vms.select { |vm| vm.tagged_with?("roles", "slave") ||  vm.tagged_with?("roles", "master") }.each { |vm| %>
 <%= vm.custom_get("hostname").to_s.strip + " ansible_host=" + vm.ipaddresses[0] + " ansible_user=" + @sshUser %>
 <% } %>
